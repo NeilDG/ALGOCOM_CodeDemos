@@ -3,6 +3,8 @@
  */
 package sorting;
 
+import java.util.Arrays;
+
 import utils.Debug;
 
 /**
@@ -67,5 +69,54 @@ public class LinearSorting {
 		
 		return sortedList;
 	}
+	
+	// A function to do counting sort of arr[] according to
+    // the digit represented by exp.
+    private static int[] countSortWithExp(int arr[], int exp)
+    {
+        int output[] = new int[arr.length]; // output array
+        int i;
+        int count[] = new int[10];
+ 
+        // Store count of occurrences in count[]
+        for (i = 0; i < arr.length; i++)
+            count[ (arr[i]/exp)%10 ]++;
+ 
+        // Change count[i] so that count[i] now contains
+        // actual position of this digit in output[]
+        for (i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+ 
+        // Build the output array
+        for (i = arr.length - 1; i >= 0; i--)
+        {
+            output[count[ (arr[i]/exp)%10 ] - 1] = arr[i];
+            count[ (arr[i]/exp)%10 ]--;
+        }
+ 
+        // Copy the output array to arr[], so that arr[] now
+        // contains sorted numbers according to curent digit
+        for (i = 0; i < output.length; i++)
+            arr[i] = output[i];
+        
+        return output;
+    }
+    
+ // The main function to that sorts arr[] of size n using
+    // Radix Sort
+    public static int[] radixSort(int numberList[])
+    {
+        // Find the maximum number to know number of digits
+        int high = findHighest(numberList);
+ 
+        // Do counting sort for every digit. Note that instead
+        // of passing digit number, exp is passed. exp is 10^i
+        // where i is current digit number
+        for (int exp = 1; high/exp > 0; exp *= 10) {
+            numberList = countSortWithExp(numberList, exp);
+        }
+        
+        return numberList;
+    }
 
 }

@@ -27,7 +27,11 @@ public class MainActivity {
 		int[] numberList = InputConverter.convertStringToArrayInt(myString);
 		int[] sortedList = LinearSorting.countingSort(numberList);
 		
-		Debug.log(TAG, "Sorted num: "+ Debug.convertArrayNumToString(sortedList));
+		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));
+		
+		sortedList = LinearSorting.radixSort(numberList);
+		
+		Debug.log(TAG, "Sorted num using radix sort: "+ Debug.convertArrayNumToString(sortedList));
 		
 	}
 
