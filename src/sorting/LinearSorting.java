@@ -4,7 +4,10 @@
 package sorting;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import sorting.CustomDateFormat.SortingType;
 import utils.Debug;
 
 /**
@@ -102,7 +105,63 @@ public class LinearSorting {
         return output;
     }
     
- // The main function to that sorts arr[] of size n using
+    /*
+	 * Performs counting sort but only returns the COUNTER HOLDER to determine placement of values
+	 */
+	public static int[] countingSortIndex(int[] numbers) {
+		//identify highest range first, which determines K
+		int k = findHighest(numbers) + 1; //+1 is needed so it counterHolder doesn't overflow
+		
+		//declare temp working storage, C
+		int[] counterHolder = new int[k];
+		
+		//tally the corresponding numbers in counterHolder
+		for(int i = 0; i < numbers.length; i++) {
+			int index = numbers[i];
+			counterHolder[index]++;
+		}
+		
+		//get the corresponding count and add it to the next
+		for(int i = 1; i < counterHolder.length; i++) {
+			counterHolder[i] += counterHolder[i - 1];
+		}
+		
+		return counterHolder;
+	}
+	
+	private static CustomDateFormat[] countingSortByDate(CustomDateFormat[] dateList, CustomDateFormat.SortingType sortingType) {
+		CustomDateFormat[] sortedDates = new CustomDateFormat[dateList.length];
+		
+		//sort month
+    	int[] values = new int[dateList.length];
+    	for(int i = 0; i < dateList.length; i++) {
+    		if(sortingType == SortingType.MONTH) {
+    			values[i] = dateList[i].getMonth();
+    		}
+    		else if(sortingType == SortingType.DAY) {
+    			values[i] = dateList[i].getDay();
+    		}
+    		else if(sortingType == SortingType.YEAR) {
+    			values[i] = dateList[i].getYear();
+    		}
+    	}
+    	
+    	//re-organize dates using index placement from counting sort
+    	int[] numberPlacement = countingSortIndex(values);   
+    	Debug.log(TAG, "Number placement: " +Debug.convertArrayNumToString(numberPlacement));
+    	for(int i = 0; i < dateList.length; i++) {
+    		int counterIndex = values[i];
+    		numberPlacement[counterIndex]--;
+    			
+        	int assignedIndex = numberPlacement[counterIndex];
+        	sortedDates[assignedIndex] = dateList[i];	   		
+    	}
+    	
+    	return sortedDates;
+	}
+	
+    
+	// The main function to that sorts arr[] of size n using
     // Radix Sort
     public static int[] radixSort(int numberList[])
     {
@@ -117,6 +176,25 @@ public class LinearSorting {
         }
         
         return numberList;
+    }
+    
+    public static CustomDateFormat[] radixSortDate(CustomDateFormat[] dateList) {
+    	CustomDateFormat[] sortedDates = new CustomDateFormat[dateList.length];
+    	
+    	//sort month
+    	sortedDates = countingSortByDate(dateList, CustomDateFormat.SortingType.MONTH);
+    	Debug.log(TAG, "Sorted dates using month: " +CustomDateFormat.convertDateFormatsToString(sortedDates));
+    	
+    	//sort day
+    	sortedDates = countingSortByDate(sortedDates, CustomDateFormat.SortingType.DAY);
+    	Debug.log(TAG, "Sorted dates using day: " +CustomDateFormat.convertDateFormatsToString(sortedDates));
+    	
+    	//sort year
+    	sortedDates = countingSortByDate(sortedDates, CustomDateFormat.SortingType.YEAR);
+    	Debug.log(TAG, "Sorted dates using year: " +CustomDateFormat.convertDateFormatsToString(sortedDates));
+    	
+    	return sortedDates;
+    	
     }
 
 }

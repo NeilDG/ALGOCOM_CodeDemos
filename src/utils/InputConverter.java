@@ -3,6 +3,8 @@
  */
 package utils;
 
+import sorting.CustomDateFormat;
+
 /**
  * Utility class for conversion of input to proper form
  * @author NeilDG
@@ -23,6 +25,21 @@ public class InputConverter {
 		}
 		
 		return numbers;
+	}
+	
+	/*
+	 * Assumes it follows MM/DD/YYYY and separated by spaces
+	 */
+	public static CustomDateFormat[] convertStringToDates(String inputText) {
+		String[] strings = inputText.split(" ");
+		
+		CustomDateFormat[] dates = new CustomDateFormat[strings.length];
+		
+		for(int i = 0; i < dates.length; i++) {
+			dates[i] = new CustomDateFormat(strings[i]);
+		}
+		
+		return dates;
 	}
 
 }
