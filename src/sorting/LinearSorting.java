@@ -4,6 +4,7 @@
 package sorting;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -108,7 +109,7 @@ public class LinearSorting {
     /*
 	 * Performs counting sort but only returns the COUNTER HOLDER to determine placement of values
 	 */
-	public static int[] countingSortIndex(int[] numbers) {
+	private static int[] countingSortIndex(int[] numbers) {
 		//identify highest range first, which determines K
 		int k = findHighest(numbers) + 1; //+1 is needed so it counterHolder doesn't overflow
 		
@@ -194,6 +195,40 @@ public class LinearSorting {
     	Debug.log(TAG, "Sorted dates using year: " +CustomDateFormat.convertDateFormatsToString(sortedDates));
     	
     	return sortedDates;
+    	
+    }
+    
+    public static int[] recursiveBucketSort(int[] numberList, int bit) {
+    	HashMap<Integer, Queue<Integer>> linkedList = new HashMap<Integer,Queue<Integer>>();
+    	for(int i = 0; i < 10; i++) {
+			linkedList.put(i, new LinkedList<Integer>());
+		}
+    	
+    	for(int i = 0; i < numberList.length; i++) {
+    		if(numberList[i] != 0) {
+    			Queue<Integer> bucket = linkedList.get(numberList[i]/bit%bit);
+    			bucket.add(numberList[i]);
+    		}
+		}
+    	
+    	//connect all buckets to form a sorted list
+    	int[] sortedList = new int[numberList.length];
+    	int index = 0;
+    	for(int i = 0; i < 10; i++) {
+    		Queue<Integer> bucket = linkedList.get(i);
+    		while(bucket.isEmpty() == false) {
+    			sortedList[index] = (int) bucket.poll();
+    			index++;
+    		}
+    		
+    		if(index > 1 && bit > 10) {
+    			Debug.log(TAG, "Recursive call: " +Debug.convertArrayNumToString(sortedList));
+    			sortedList = recursiveBucketSort(sortedList, bit / 10);
+    		}
+    		
+		}
+    	
+    	return sortedList;
     	
     }
 

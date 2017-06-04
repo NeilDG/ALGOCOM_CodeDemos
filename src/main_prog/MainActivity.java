@@ -32,13 +32,20 @@ public class MainActivity {
 		
 		sortedList = LinearSorting.radixSort(numberList);
 		
-		Debug.log(TAG, "Sorted num using radix sort: "+ Debug.convertArrayNumToString(sortedList));*/
+		Debug.log(TAG, "Sorted num using radix sort: "+ Debug.convertArrayNumToString(sortedList));
 		
 		String dateString = Debug.askStringInput(TAG, "Input dates following MM/DD/YYYY format, separated by spaces: ");
 		
 		CustomDateFormat[] dates = InputConverter.convertStringToDates(dateString);
-		LinearSorting.radixSortDate(dates);
+		LinearSorting.radixSortDate(dates);  */
 		
+		
+		//bucket sort test
+		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		
+		int[] numberList = InputConverter.convertStringToArrayInt(myString);
+		int[] sortedList = LinearSorting.recursiveBucketSort(numberList, 100);
+		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));
 	}
 
 }
