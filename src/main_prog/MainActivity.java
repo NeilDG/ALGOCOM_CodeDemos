@@ -44,7 +44,7 @@ public class MainActivity {
 		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
 		
 		int[] numberList = InputConverter.convertStringToArrayInt(myString);
-		int[] sortedList = LinearSorting.recursiveBucketSort(numberList, 100);
+		int[] sortedList = LinearSorting.recursiveBucketSort(numberList, 3);
 		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));
 	}
 

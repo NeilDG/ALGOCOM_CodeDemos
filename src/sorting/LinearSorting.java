@@ -3,6 +3,7 @@
  */
 package sorting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -198,7 +199,11 @@ public class LinearSorting {
     	
     }
     
-    public static int[] recursiveBucketSort(int[] numberList, int bit) {
+    public static int getNthDigit(int number, int n) {    
+    	  return (int) ((number / Math.pow(10, n - 1)) % 10);
+    }
+    
+    public static int[] recursiveBucketSort(int[] numberList, int nDigit) {
     	HashMap<Integer, Queue<Integer>> linkedList = new HashMap<Integer,Queue<Integer>>();
     	for(int i = 0; i < 10; i++) {
 			linkedList.put(i, new LinkedList<Integer>());
@@ -206,29 +211,43 @@ public class LinearSorting {
     	
     	for(int i = 0; i < numberList.length; i++) {
     		if(numberList[i] != 0) {
-    			Queue<Integer> bucket = linkedList.get(numberList[i]/bit%bit);
+    			Debug.log(TAG, "Bucket assignment: " +getNthDigit(numberList[i], nDigit));
+    			Queue<Integer> bucket = linkedList.get(getNthDigit(numberList[i], nDigit));
     			bucket.add(numberList[i]);
     		}
 		}
     	
     	//connect all buckets to form a sorted list
-    	int[] sortedList = new int[numberList.length];
+    	ArrayList<Integer> sortedList = new ArrayList<Integer>();
     	int index = 0;
     	for(int i = 0; i < 10; i++) {
     		Queue<Integer> bucket = linkedList.get(i);
     		while(bucket.isEmpty() == false) {
-    			sortedList[index] = (int) bucket.poll();
+    			sortedList.add(bucket.poll());
     			index++;
     		}
     		
-    		if(index > 1 && bit > 10) {
-    			Debug.log(TAG, "Recursive call: " +Debug.convertArrayNumToString(sortedList));
-    			sortedList = recursiveBucketSort(sortedList, bit / 10);
+    		if(index > 1 && nDigit > 1) {
+    			//Debug.log(TAG, "Recursive call: " +Debug.convertArrayNumToString(sortedList) + " Bit: " +bit+ " Next bit: " +bit/10);
+    			//convert to array
+    	    	int[] sortedArray = new int[sortedList.size()];
+    	    	for(int j = 0; j < sortedArray.length; j++) {
+    	    		sortedArray[j] = sortedList.get(j);
+    	    		
+    	    	}
+    	    	
+    	    	sortedArray = recursiveBucketSort(sortedArray, nDigit - 1);
     		}
     		
 		}
     	
-    	return sortedList;
+    	//convert to array
+    	int[] sortedArray = new int[sortedList.size()];
+    	for(int i = 0; i < sortedArray.length; i++) {
+    		sortedArray[i] = sortedList.get(i);
+    		
+    	}
+    	return sortedArray;
     	
     }
 
