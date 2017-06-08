@@ -5,6 +5,7 @@ package main_prog;
 
 import java.util.Scanner;
 
+import sorting.ClassicalSorting;
 import sorting.CustomDateFormat;
 import sorting.LinearSorting;
 import utils.Debug;
@@ -41,11 +42,18 @@ public class MainActivity {
 		
 		
 		//bucket sort test
-		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		/*String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
 		
 		int[] numberList = InputConverter.convertStringToArrayInt(myString);
 		int[] sortedList = LinearSorting.recursiveBucketSort(numberList, 3);
-		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));
+		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));*/
+		
+		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		
+		int[] numberList = InputConverter.convertStringToArrayInt(myString);
+		ClassicalSorting.mergeSort2(numberList, 0, numberList.length - 1);
+		//int[] sortedList = ClassicalSorting.mergeSort(numberList);
+		Debug.log(TAG, "Sorted num using merge sort: "+ Debug.convertArrayNumToString(numberList));
 	}
 
 }
