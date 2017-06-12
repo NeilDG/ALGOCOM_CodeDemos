@@ -15,15 +15,14 @@ public class ClassicalSorting {
 	
 	public static int[] mergeSort(int[] numberList) {
 		int low = 0;
-		int high = numberList.length;
+		int high = numberList.length - 1;
 		
 		return mergeSortProper(numberList, low, high);
 	}
 	
 	private static int[] mergeSortProper(int[] numberList, int low, int high) {
 		if(low < high) {
-			int middle = low + (high - low) / 2;
-			Debug.log(TAG, "Low: " +low+ " Mid: " +middle+ " High: " +high);
+			int middle = (low + high) / 2;
 			mergeSortProper(numberList, low, middle);
 			mergeSortProper(numberList, middle + 1, high);
 			merge(numberList, low, middle, high);
@@ -33,7 +32,7 @@ public class ClassicalSorting {
 	}
 	
 	private static void merge(int[] mergeList, int low, int mid, int high) {
-		int leftSize = mid - low;
+		int leftSize = mid - low + 1;
 		int rightSize = high - mid;
 		
 		//initialize left and right sub-array such that the corresponding elements from mergeList are copied to its left/right partition
@@ -45,7 +44,7 @@ public class ClassicalSorting {
 		}
 		
 		for(int i = 0; i < rightSize; i++) {
-			rightArray[i] = mergeList[mid + i];
+			rightArray[i] = mergeList[mid + i + 1];
 		}
 		
 		//add a sentinel value so that any compares with this will guarantee that the the list is already empty
@@ -56,8 +55,8 @@ public class ClassicalSorting {
 		//combine step
 		int leftIndex = 0;
 		int rightIndex = 0;
-		for(int i = low; i < high; i++) {
-			Debug.log(TAG, "Left: " +leftArray[leftIndex]+ " Right: " +rightArray[rightIndex]);
+		for(int i = low; i <= high; i++) {
+			//Debug.log(TAG, "Left: " +leftArray[leftIndex]+ " Right: " +rightArray[rightIndex]);
 			if(leftArray[leftIndex] <= rightArray[rightIndex]) {
 				mergeList[i] = leftArray[leftIndex];
 				leftIndex++;
@@ -144,5 +143,44 @@ public class ClassicalSorting {
             // Merge the sorted halves
             merge2(arr, l, m, r);
         }
+    }
+    
+    private static void swap(int[] array, int indexA, int indexB) {
+    	int temp = array[indexA];
+    	array[indexA] = array[indexB];
+    	array[indexB] = temp;
+    }
+    
+    private static int partition(int[] numberList, int low, int high) {
+    	int pivot = numberList[high]; //take the last element of the pivot.
+    	int index = low - 1;
+    	
+    	for(int i = low; i < high; i++) {
+    		// If current element is smaller than or
+            // equal to pivot
+            if (numberList[i] <= pivot)
+            {
+                index++;
+                swap(numberList, i, index);
+            }
+    	}
+    	
+    	//put the pivot into correct position
+    	swap(numberList, index + 1, high);
+    	
+    	return index + 1;
+    	
+    }
+    
+    public static int[] quickSort(int[] numberList, int low, int high) {
+    	if(low < high) {
+          int pivot = partition(numberList, low, high);
+          // Recursively sort elements before
+          // partition and after partition
+          quickSort(numberList, low, pivot-1);
+          quickSort(numberList, pivot+1, high);
+    	}
+    	
+    	return numberList; //sorted
     }
 }

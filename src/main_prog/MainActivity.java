@@ -50,10 +50,16 @@ public class MainActivity {
 		
 		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
 		
+		//merge sort
 		int[] numberList = InputConverter.convertStringToArrayInt(myString);
-		ClassicalSorting.mergeSort2(numberList, 0, numberList.length - 1);
-		//int[] sortedList = ClassicalSorting.mergeSort(numberList);
-		Debug.log(TAG, "Sorted num using merge sort: "+ Debug.convertArrayNumToString(numberList));
+		int[] sortedList = ClassicalSorting.mergeSort(numberList);
+		//ClassicalSorting.mergeSort2(numberList, 0, numberList.length - 1);
+		Debug.log(TAG, "Sorted num using merge sort: "+ Debug.convertArrayNumToString(sortedList));
+		
+		//quick sort
+		numberList = InputConverter.convertStringToArrayInt(myString);
+		sortedList = ClassicalSorting.quickSort(numberList, 0, numberList.length - 1);
+		Debug.log(TAG, "Sorted num using quick sort: "+ Debug.convertArrayNumToString(sortedList));
 	}
 
 }
