@@ -8,6 +8,7 @@ import java.util.Scanner;
 import sorting.ClassicalSorting;
 import sorting.CustomDateFormat;
 import sorting.LinearSorting;
+import string_match.StringFSM;
 import utils.Debug;
 import utils.InputConverter;
 
@@ -48,10 +49,12 @@ public class MainActivity {
 		int[] sortedList = LinearSorting.recursiveBucketSort(numberList, 3);
 		Debug.log(TAG, "Sorted num using counting sort: "+ Debug.convertArrayNumToString(sortedList));*/
 		
-		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		/*String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		int[] numberList = InputConverter.convertStringToArrayInt(myString);
+		ClassicalSorting.binarySearch(numberList, 1, 0, numberList.length - 1);*/
 		
 		//merge sort
-		int[] numberList = InputConverter.convertStringToArrayInt(myString);
+		/*int[] numberList = InputConverter.convertStringToArrayInt(myString);
 		int[] sortedList = ClassicalSorting.mergeSort(numberList);
 		//ClassicalSorting.mergeSort2(numberList, 0, numberList.length - 1);
 		Debug.log(TAG, "Sorted num using merge sort: "+ Debug.convertArrayNumToString(sortedList));
@@ -59,7 +62,21 @@ public class MainActivity {
 		//quick sort
 		numberList = InputConverter.convertStringToArrayInt(myString);
 		sortedList = ClassicalSorting.quickSort(numberList, 0, numberList.length - 1);
-		Debug.log(TAG, "Sorted num using quick sort: "+ Debug.convertArrayNumToString(sortedList));
+		Debug.log(TAG, "Sorted num using quick sort: "+ Debug.convertArrayNumToString(sortedList));*/
+		
+		String text = Debug.askStringInput(TAG, "Input text string: ");
+		String pattern = Debug.askStringInput(TAG, "Input pattern to search for in " +text+": ");
+		int[] lastIndices = StringFSM.getInstance().checkMatch(text, pattern);
+		
+		if(lastIndices.length > 0) {
+			for(int i = 0; i < lastIndices.length; i++) {
+				Debug.log(TAG, "Last index: " +lastIndices[i]);
+			}
+		}
+		else {
+			Debug.log(TAG, "Pattern not found");
+		}
+		
 	}
 
 }

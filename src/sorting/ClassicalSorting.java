@@ -183,4 +183,23 @@ public class ClassicalSorting {
     	
     	return numberList; //sorted
     }
+    
+   public static int binarySearch(int[] A, int value, int low, int high) {
+	   if (high < low)          
+			return -1; // not found
+			
+		int mid = (low + high) / 2;
+		
+		if (A[mid] > value) {
+			Debug.log(TAG, "A[mid] > value called");
+			return binarySearch(A, value, low, mid - 1) ;  
+		}
+		else if (A[mid] < value)   {      
+			Debug.log(TAG, "A[mid] < value called");
+			return binarySearch(A, value, mid + 1, high) ;  
+		}
+		else           
+			return mid;
+ 
+   }
 }
