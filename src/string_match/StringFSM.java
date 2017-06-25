@@ -45,7 +45,7 @@ public class StringFSM implements IStringMatcher{
 				this.currentState = this.currentState.getTransition();
 				
 				if(this.currentState.isAcceptingState()) {
-					indexList.add(i);
+					indexList.add(i + 1);
 				}
 			}
 			else {

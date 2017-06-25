@@ -8,6 +8,7 @@ import java.util.Scanner;
 import sorting.ClassicalSorting;
 import sorting.CustomDateFormat;
 import sorting.LinearSorting;
+import string_match.BoyerMooreMatcher;
 import string_match.RabinKarpMatcher;
 import string_match.StringFSM;
 import utils.Debug;
@@ -72,6 +73,9 @@ public class MainActivity {
 		
 		lastIndices = RabinKarpMatcher.getInstance().checkMatch(text, pattern);
 		Debug.printIndices(TAG, "RabinKarp", lastIndices);
+		
+		lastIndices = BoyerMooreMatcher.getInstance().checkMatch(text, pattern);
+		Debug.printIndices(TAG, "BoyerMoore", lastIndices);
 		
 	}
 
