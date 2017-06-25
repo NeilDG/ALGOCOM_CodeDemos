@@ -6,6 +6,7 @@ package string_match;
 import java.util.LinkedList;
 
 import utils.Debug;
+import utils.InputConverter;
 
 /**
  * Manager for the string matching FSM. Assume we only accept a P that do not have 
@@ -13,7 +14,7 @@ import utils.Debug;
  * @author NeilDG
  *
  */
-public class StringFSM {
+public class StringFSM implements IStringMatcher{
 	private static String TAG = "StringFSM";
 	
 	private static StringFSM sharedInstance = null;
@@ -52,12 +53,10 @@ public class StringFSM {
 			}
 		}
 		
-		int[] lastIndices = new int[indexList.size()];
-		for(int i = 0; i < lastIndices.length; i++) {
-			lastIndices[i] = indexList.get(i);
-		}
-		
-		return lastIndices;
+		//reset FSM
+		this.transitionList.clear();
+		this.currentState = null;
+		return InputConverter.listToArray(indexList);
 	}
 	
 	private void buildFSM(String pattern) {
@@ -78,7 +77,7 @@ public class StringFSM {
 			FSMState state = this.transitionList.get(i - 1);
 			FSMState nextState = this.transitionList.get(i);
 			
-			Debug.log(TAG, "Created transition for char " +pattern.charAt(index));
+			//Debug.log(TAG, "Created transition for char " +pattern.charAt(index));
 			state.setTransition(nextState, pattern.charAt(index));
 			index++;
 		}

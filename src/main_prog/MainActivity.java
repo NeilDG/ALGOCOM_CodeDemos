@@ -8,6 +8,7 @@ import java.util.Scanner;
 import sorting.ClassicalSorting;
 import sorting.CustomDateFormat;
 import sorting.LinearSorting;
+import string_match.RabinKarpMatcher;
 import string_match.StringFSM;
 import utils.Debug;
 import utils.InputConverter;
@@ -67,15 +68,10 @@ public class MainActivity {
 		String text = Debug.askStringInput(TAG, "Input text string: ");
 		String pattern = Debug.askStringInput(TAG, "Input pattern to search for in " +text+": ");
 		int[] lastIndices = StringFSM.getInstance().checkMatch(text, pattern);
+		Debug.printIndices(TAG, "FSM", lastIndices);
 		
-		if(lastIndices.length > 0) {
-			for(int i = 0; i < lastIndices.length; i++) {
-				Debug.log(TAG, "Last index: " +lastIndices[i]);
-			}
-		}
-		else {
-			Debug.log(TAG, "Pattern not found");
-		}
+		lastIndices = RabinKarpMatcher.getInstance().checkMatch(text, pattern);
+		Debug.printIndices(TAG, "RabinKarp", lastIndices);
 		
 	}
 

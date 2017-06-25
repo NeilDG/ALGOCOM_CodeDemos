@@ -43,4 +43,15 @@ public class Debug {
 		
 		return message;
 	}
+	
+	public static void printIndices(String tag, String algo, int[] lastIndices) {
+		if(lastIndices.length > 0) {
+			for(int i = 0; i < lastIndices.length; i++) {
+				Debug.log(tag + " - " +algo, "Last index: " +lastIndices[i]);
+			}
+		}
+		else {
+			Debug.log(tag + " - " +algo, "Pattern not found");
+		}
+	}
 }
