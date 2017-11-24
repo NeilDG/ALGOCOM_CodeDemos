@@ -3,6 +3,7 @@
  */
 package utils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import sorting.CustomDateFormat;
@@ -27,6 +28,17 @@ public class InputConverter {
 		}
 		
 		return numbers;
+	}
+	
+	public static ArrayList<Integer> convertStringToArrayList(String inputText) {
+		String[] strings = inputText.split(" ");
+		
+		ArrayList<Integer> arrayList = new ArrayList<Integer>();
+		for(int i = 0; i < strings.length; i++) {
+			arrayList.add(Integer.parseInt(strings[i]));
+		}
+		
+		return arrayList;
 	}
 	
 	public static int[] listToArray(LinkedList<Integer> linkedList) {

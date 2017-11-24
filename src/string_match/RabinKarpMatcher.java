@@ -41,7 +41,7 @@ public class RabinKarpMatcher implements IStringMatcher {
 			
 			//Debug.log(TAG, "Checking substring " +subString);
 			//subString.hashCode() == pattern.hashCode()
-			if(customHash(subString, 23) == customHash(pattern, 23)) {
+			if(customHash(subString, 2) == customHash(pattern, 2)) {
 				
 				if(this.verify(subString, pattern)) {
 					Debug.log(TAG, "Pattern occurs in T");
@@ -59,7 +59,7 @@ public class RabinKarpMatcher implements IStringMatcher {
 	}
 	
 	private int customHash(String stringToHash, int prime) {
-		int d = 256; //number of ASCII characters
+		int d = 10; //number of ASCII characters
 		int hash = 1;
 		 // Calculate the hash value of pattern and first
 	    // window of text
@@ -67,6 +67,7 @@ public class RabinKarpMatcher implements IStringMatcher {
 	    for (int i = 0; i < M; i++)
 	    {
 	        hash = (d*hash + stringToHash.charAt(i))%prime;
+	       // Debug.log(TAG, "Hash: " +hash);
 	    }
 	    
 	    return hash;

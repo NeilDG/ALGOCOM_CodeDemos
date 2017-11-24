@@ -21,6 +21,7 @@ public class ClassicalSorting {
 	}
 	
 	private static int[] mergeSortProper(int[] numberList, int low, int high) {
+		MergeSortCounter.getInstance().divideCounter++;
 		if(low < high) {
 			int middle = (low + high) / 2;
 			mergeSortProper(numberList, low, middle);
@@ -66,6 +67,8 @@ public class ClassicalSorting {
 				rightIndex++;
 			}
 		}
+		
+		MergeSortCounter.getInstance().conquerCounter++;
 	}
 	
 	 // Merges two subarrays of arr[].

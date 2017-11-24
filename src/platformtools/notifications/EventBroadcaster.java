@@ -45,6 +45,7 @@ public class EventBroadcaster {
 			listenerList.add(listener);
 			this.notificationMap.put(notificationString, listenerList);
 		}
+		
 	}
 	
 	public void removeObserver(String notificationString, EventListener listener) {

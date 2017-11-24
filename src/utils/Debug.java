@@ -16,12 +16,27 @@ public class Debug {
 		System.out.println("["+tag+"]: " +message);
 	}
 	
+	public static void log(String message) {
+		System.out.println(message);
+	}
+	
+	public static int askInput(String message) {
+		Scanner inputScanner = new Scanner(System.in);
+		System.out.print(message);
+		
+		int number = inputScanner.nextInt();
+		//inputScanner.close();
+		
+		return number;
+	}
+	
 	public static int askInput(String tag, String message) {
 		Scanner inputScanner = new Scanner(System.in);
 		System.out.print("["+tag+"]: " +message);
 		
 		int number = inputScanner.nextInt();
 		
+		//inputScanner.close();
 		return number;
 	}
 	

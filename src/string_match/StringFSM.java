@@ -53,6 +53,7 @@ public class StringFSM implements IStringMatcher{
 			}
 		}
 		
+		Debug.log(TAG, "Character comparisons: " +text.length());
 		//reset FSM
 		this.transitionList.clear();
 		this.currentState = null;
