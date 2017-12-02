@@ -5,6 +5,7 @@ package main_prog;
 
 import java.util.Scanner;
 
+import cmpiler_test.BranchPredictionTest;
 import cmpiler_test.CmpilerTests;
 import sorting.ClassicalSorting;
 import sorting.CustomDateFormat;
@@ -60,20 +61,23 @@ public class MainActivity {
 		Debug.log(TAG, "Value is found. Index: " +index);*/
 		
 		
-		CmpilerTests test = new CmpilerTests();
-		//test.arrayTest();
-		//test.arrayTest2();
+		BranchPredictionTest.randomlySortedTest();
+		BranchPredictionTest.sortedTest();
 		
-		int x = 127;
-		Debug.log("Number of 7's: " +test.count7(x));
+		//CmpilerTests test = new CmpilerTests();
+		//test.varTest();
+		//test.arrayTest();
+		//test.arrayTest2();		
+		//int x = 127;
+		//Debug.log("Number of 7's: " +test.count7(x));
 		
 		//merge sort
-		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
+		/*String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
 		int[] numberList = InputConverter.convertStringToArrayInt(myString);
 		int[] sortedList = ClassicalSorting.mergeSort(numberList);
 		//ClassicalSorting.mergeSort2(numberList, 0, numberList.length - 1);
 		Debug.log(TAG, "Sorted num using merge sort: "+ Debug.convertArrayNumToString(sortedList));
-		Debug.log(TAG, "Divide steps: "+ MergeSortCounter.getInstance().divideCounter+ " Conquer steps: " +MergeSortCounter.getInstance().conquerCounter);
+		Debug.log(TAG, "Divide steps: "+ MergeSortCounter.getInstance().divideCounter+ " Conquer steps: " +MergeSortCounter.getInstance().conquerCounter);*/
 		
 		//quick sort
 		/*numberList = InputConverter.convertStringToArrayInt(myString);

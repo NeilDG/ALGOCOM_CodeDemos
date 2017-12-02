@@ -14,11 +14,11 @@ public class CmpilerTests {
 		final float MULTIPLIER = 2.0f;
 		final float DIVIDER = 1.5f;
 		
-		int x = 0, y = 0, z = 0;
+		int x = 1, y = 1, z = x + 2;
 		
-		x += 4;
-		y += 5;
-		z += 6;
+		x += (x + z);
+		y += 1;
+		z += 1;
 		
 		float finalValue = (((x + y) * MULTIPLIER) / DIVIDER + x + y) - y * MULTIPLIER;
 		

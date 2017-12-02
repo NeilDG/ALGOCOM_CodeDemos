@@ -23,6 +23,8 @@ public class OptimizationTest {
 		static final int res = 250;
 	}
 	
+	//NOTE: iMUl only appears when there is a variable reference.
+	
 	public class ConstantArithmetic {
 		static final int SECONDS_IN_30_DAYS = 60*60*24*30;
 		static final int SECONDS_IN_30_DAYS_2 = 2592000;
@@ -34,7 +36,14 @@ public class OptimizationTest {
 			int y = 60*60*24;
 		}
 		
-		//NOTE: iMUl only appears when there is a variable reference.
+		public void arithmeticRef() {
+			int secondsTest = 60*60*24*30;
+			
+			int x = 60*60;
+			int y = x*24;
+		}
+		
+		
 	}
 	
 	public class BooleanSimplification {
@@ -77,6 +86,15 @@ public class OptimizationTest {
 			double depth = d * (lim / max);
 			double x = depth * sx;
 			double y = depth * sy;
+		}
+	}
+	
+	public class DeadCode {
+		public void deads() {
+			boolean b = false;
+			if(b) {
+				Debug.log("Hello world.");
+			}
 		}
 	}
 	
