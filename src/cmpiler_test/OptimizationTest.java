@@ -12,6 +12,7 @@ import utils.Debug;
  */
 public class OptimizationTest {
 
+
 	public class UnoptimizedClass {
 		//constant folding example
 		static final int length = 25;
@@ -23,11 +24,9 @@ public class OptimizationTest {
 		static final int res = 250;
 	}
 	
-	//NOTE: iMUl only appears when there is a variable reference.
-	
 	public class ConstantArithmetic {
-		static final int SECONDS_IN_30_DAYS = 60*60*24*30;
-		static final int SECONDS_IN_30_DAYS_2 = 2592000;
+		//static final int SECONDS_IN_30_DAYS = 60*60*24*30;
+		//static final int SECONDS_IN_30_DAYS_2 = 2592000;
 		
 		public void arithmetic() {
 			int secondsTest = 60*60*24*30;
@@ -86,6 +85,27 @@ public class OptimizationTest {
 			double depth = d * (lim / max);
 			double x = depth * sx;
 			double y = depth * sy;
+		}
+	}
+	
+	public class StringBuilderTest {
+		
+		public void stringTest1() {
+			String str1 = "Kevin Tiyan ";
+			String str2 = "Ryan Sexy Beast";
+			
+			//people argue that you must use StringBuilder for appending strings
+			str1 = str1 + str2;
+		}
+		
+		public void stringTest2() {
+			//supposedly, each concatenation should trigger the StringBuilder class!
+			String longString =  "This course introduces the theories, formal techniques, design, and implementation considerations "
+					+ "in the construction of interpreters, compilers, and language translators in general.  "
+					+ "Students will get to realize the importance and applications of concepts taught "
+					+ "in their previous CS courses, namely, the use of regular expressions and context-free grammars (AUTOMAT)"
+					+ ", creating efficient and scalable algorithms (ALGOCOM), understanding the components of a program (OPERSYS)"
+					+ ", and practicing professional software development of an interpreter system (SOFENGG, PROSDEV).";
 		}
 	}
 	
