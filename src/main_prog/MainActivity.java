@@ -3,17 +3,10 @@
  */
 package main_prog;
 
-import java.util.Scanner;
-
-import cmpiler_test.BranchPredictionTest;
-import cmpiler_test.CmpilerTests;
-import sorting.ClassicalSorting;
-import sorting.CustomDateFormat;
-import sorting.LinearSorting;
-import sorting.MergeSortCounter;
-import string_match.BoyerMooreMatcher;
-import string_match.RabinKarpMatcher;
-import string_match.StringFSM;
+import problems.Cryptanalysis;
+import problems.Dialpad;
+import problems.Intersection;
+import problems.Intersection.SolutionType;
 import utils.Debug;
 import utils.InputConverter;
 
@@ -25,8 +18,8 @@ import utils.InputConverter;
 public class MainActivity {
 	private final static String TAG = "MainActivity";
 
-	
 	public static void main(String[] args) {
+		
 		/*String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces: ");
 		Debug.log(TAG, myString);
 		
@@ -61,8 +54,8 @@ public class MainActivity {
 		Debug.log(TAG, "Value is found. Index: " +index);*/
 		
 		
-		BranchPredictionTest.randomlySortedTest();
-		BranchPredictionTest.sortedTest();
+		//BranchPredictionTest.randomlySortedTest();
+		//BranchPredictionTest.sortedTest();
 		
 		//CmpilerTests test = new CmpilerTests();
 		//test.varTest();
@@ -95,6 +88,19 @@ public class MainActivity {
 		lastIndices = BoyerMooreMatcher.getInstance().checkMatch(text, pattern);
 		Debug.printIndices(TAG, "BoyerMoore", lastIndices);*/
 		
+		//String text = Debug.askStringInput(TAG, "Input text string: ");
+		//Dialpad.getNumKeystrokes(text);
+		//Dialpad.hashKeystrokes(text);
+		//Cryptanalysis.analyze(text);
+		
+		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces for list A: ");
+		int[] A = InputConverter.convertStringToArrayInt(myString);
+		
+		myString = Debug.askStringInput(TAG, "Input numbers separated by spaces for list B: ");
+		int[] B = InputConverter.convertStringToArrayInt(myString);
+		Intersection.findIntersection(A, B, SolutionType.BRUTE_FORCE);
+		Intersection.findIntersection(A, B, SolutionType.HASHING);
+		Intersection.findIntersection(A, B, SolutionType.HASHING_WITH_DUPLICATES);
 	}
 
 }
