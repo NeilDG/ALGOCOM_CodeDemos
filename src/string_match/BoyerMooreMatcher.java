@@ -59,6 +59,7 @@ public class BoyerMooreMatcher implements IStringMatcher {
 	public int[] checkMatch(String text, String pattern) {
 		LinkedList<Integer> indicesList = new LinkedList<Integer>();
 		
+		int compares = 0;
 		int M = pattern.length();
 		int N = text.length();
 		int[] badCharArr = this.generateBadCharHeur(pattern);
@@ -72,8 +73,10 @@ public class BoyerMooreMatcher implements IStringMatcher {
 		 /* Keep reducing index j of pattern while 
 		    characters of pattern and text are 
 		    matching at this shift s */
-		 while(j >= 0 && pattern.charAt(j) == text.charAt(s+j))
+		 while(j >= 0 && pattern.charAt(j) == text.charAt(s+j)) {
 		     j--;
+		     compares++;
+		 }
 		
 		 /* If the pattern is present at current
 		    shift, then index j will become -1 after
@@ -89,7 +92,9 @@ public class BoyerMooreMatcher implements IStringMatcher {
 		        the case when pattern occurs at the end 
 		        of text */
 		     s += (s +M < N) ? M - badCharArr[text.charAt(s + M)] : 1;
-		
+		     
+		     compares++;
+
 		 }
 		
 		 else
@@ -104,6 +109,7 @@ public class BoyerMooreMatcher implements IStringMatcher {
 		     s += max(1, j - badCharArr[text.charAt(s + j)]);
 		}
 		
+	    Debug.log("Char comparisons for BM: " +compares);
 		return InputConverter.listToArray(indicesList);
 	}
 }

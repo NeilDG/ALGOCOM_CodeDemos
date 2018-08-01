@@ -7,6 +7,11 @@ import problems.Cryptanalysis;
 import problems.Dialpad;
 import problems.Intersection;
 import problems.Intersection.SolutionType;
+import string_match.BoyerMooreMatcher;
+import string_match.BruteForceMatcher;
+import string_match.KMPMatcher;
+import string_match.RabinKarpMatcher;
+import string_match.StringFSM;
 import utils.Debug;
 import utils.InputConverter;
 
@@ -77,30 +82,35 @@ public class MainActivity {
 		sortedList = ClassicalSorting.quickSort(numberList, 0, numberList.length - 1);
 		Debug.log(TAG, "Sorted num using quick sort: "+ Debug.convertArrayNumToString(sortedList));*/
 		
-		/*String text = Debug.askStringInput(TAG, "Input text string: ");
+		String text = Debug.askStringInput(TAG, "Input text string: ");
 		String pattern = Debug.askStringInput(TAG, "Input pattern to search for in " +text+": ");
-		int[] lastIndices = StringFSM.getInstance().checkMatch(text, pattern);
-		Debug.printIndices(TAG, "FSM", lastIndices);
+		//int[] lastIndices = StringFSM.getInstance().checkMatch(text, pattern);
+		//Debug.printIndices(TAG, "FSM", lastIndices);
 		
-		lastIndices = RabinKarpMatcher.getInstance().checkMatch(text, pattern);
+		int[] lastIndices = RabinKarpMatcher.getInstance().checkMatch(text, pattern);
 		Debug.printIndices(TAG, "RabinKarp", lastIndices);
 		
-		lastIndices = BoyerMooreMatcher.getInstance().checkMatch(text, pattern);
-		Debug.printIndices(TAG, "BoyerMoore", lastIndices);*/
+		//lastIndices = BoyerMooreMatcher.getInstance().checkMatch(text, pattern);
+		//Debug.printIndices(TAG, "BoyerMoore", lastIndices);
+		
+		//lastIndices = BruteForceMatcher.getInstance().checkMatch(text, pattern);
+		//Debug.printIndices(TAG, "BruteForce", lastIndices);
+		
+		//KMPMatcher.getInstance().KMPSearch(pattern, text);
 		
 		//String text = Debug.askStringInput(TAG, "Input text string: ");
 		//Dialpad.getNumKeystrokes(text);
 		//Dialpad.hashKeystrokes(text);
 		//Cryptanalysis.analyze(text);
 		
-		String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces for list A: ");
+		/*String myString = Debug.askStringInput(TAG, "Input numbers separated by spaces for list A: ");
 		int[] A = InputConverter.convertStringToArrayInt(myString);
 		
 		myString = Debug.askStringInput(TAG, "Input numbers separated by spaces for list B: ");
 		int[] B = InputConverter.convertStringToArrayInt(myString);
 		Intersection.findIntersection(A, B, SolutionType.BRUTE_FORCE);
 		Intersection.findIntersection(A, B, SolutionType.HASHING);
-		Intersection.findIntersection(A, B, SolutionType.HASHING_WITH_DUPLICATES);
+		Intersection.findIntersection(A, B, SolutionType.HASHING_WITH_DUPLICATES);*/
 	}
 
 }
