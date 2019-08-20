@@ -1,4 +1,4 @@
-package p5_problems;
+package algocom_pe_test.p5_problems;
 
 public class P5_TestRunner {
 	private final static String TAG = "P5_TestRunner";
