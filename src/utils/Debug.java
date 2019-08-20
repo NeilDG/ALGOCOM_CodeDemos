@@ -49,6 +49,15 @@ public class Debug {
 		return text;
 	}
 	
+	public static String askStringInput(String message) {
+		Scanner inputScanner = new Scanner(System.in);
+		System.out.print(message);
+		
+		String text = inputScanner.nextLine();
+		
+		return text;
+	}
+	
 	public static String convertArrayNumToString(int[] numbers) {
 		String message = "";
 		
